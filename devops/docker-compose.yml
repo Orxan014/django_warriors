@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  sahibinden_db:
+    image: postgres:11.5
+    container_name: base_prj_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./../../base_prj_db:/var/lib/postgresql/data
