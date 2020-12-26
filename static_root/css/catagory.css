@@ -1,0 +1,102 @@
+.navbar-nav > li {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+section {
+  position: relative;
+  background-color: black;
+  height: 70vh;
+  min-height: 10rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+section img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+section .container {
+  position: relative;
+  z-index: 2;
+}
+
+section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+@media (pointer: coarse) and (hover: none) {
+  section {
+    background: url("https://source.unsplash.com/XT5OInaElMw/1600x900") black
+      no-repeat center center scroll;
+  }
+  section video {
+    display: none;
+  }
+}
+
+#video-content .explore-events {
+  background-color: white;
+  color: #384cbd;
+}
+
+.images {
+  width: 254px;
+  height: 180px;
+}
+
+.images img {
+  width: 100%;
+  height: 100%;
+}
+
+.row-equal .card {
+  width: 100%;
+}
+
+.join {
+  background: linear-gradient(to right, #3165b2, #90298d) !important;
+}
+
+.row-equal.active,
+.row-equal.next,
+.row-equal.prev {
+  display: flex;
+}
+
+.star-logo {
+  width: 20px;
+  height: 20px;
+  position: center;
+}
+
+.card-add {
+  display: none;
+}
+
+.card-add.mt-4 {
+  text-align: center;
+  pointer-events: none;
+}
+
+.card-block .outdoor-activities {
+  color: #90298d;
+}

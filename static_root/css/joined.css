@@ -1,0 +1,88 @@
+.profile {
+  width: 90px;
+  height: 40px;
+}
+.nav-item:nth-child(1) {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.nav-item:nth-child(2) {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.profile-image {
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  justify-content: center;
+  align-items: center;
+  /* background-position: center; */
+  /* position: relative; */
+  z-index: 2;
+}
+@media screen and (max-width: 800px) {
+ .card-add {
+      display: block !important;
+  }
+  
+}
+#profile-list .list-inline-item {
+  /* border: none; */
+  outline: none;
+  padding: 10px 16px;
+  /* background-color: #f1f1f1; */
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* .active, .list-inline-item:hover {
+    border-bottom: 3px solid  #90298d;
+                        height: 45px;
+} */
+.active {
+  border-bottom: 3px solid #90298d;
+  height: 45px;
+}
+#profile-list a {
+  color: rgb(94, 93, 93);
+  text-decoration: none;
+}
+.images {
+  width: 254px;
+  height: 180px;
+}
+
+.images img {
+  width: 100%;
+  height: 100%;
+}
+.row-equal .card {
+  width: 100%;
+}
+.join {
+  background: linear-gradient(to right, #3165b2, #90298d) !important;
+}
+.row-equal.active,
+.row-equal.next,
+.row-equal.prev {
+  display: flex;
+}
+
+.star-logo {
+  width: 20px;
+  height: 20px;
+  position: center;
+}
+
+.card-add {
+  display: none;
+}
+
+.card-add.mt-4 {
+  text-align: center;
+  pointer-events: none;
+}
+.card-block .outdoor-activities {
+  color: #90298d;
+}

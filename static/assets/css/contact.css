@@ -1,0 +1,93 @@
+/* .navbar-nav>li {
+    padding-left: 20px;
+    padding-right: 20px;
+} */
+
+.nav-list {
+    margin-right: -52px;
+}
+
+.nav-list .line {
+    margin-top: 2px;
+}
+
+/* .nav-list {
+    margin-right: -52px;
+} */
+
+@media only screen and (max-width: 1024px) {
+    .logo {
+        margin-left: 33px;
+    }
+    .nav-list {
+        margin-right: 18px;
+    }
+}
+
+@media (max-width: 800px) {
+    .nav-list .line {
+        display: none;
+    }
+    input#name {
+        margin-bottom: 25px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .logo {
+        margin-left: 20px;
+    }
+    .nav-list {
+        margin-right: 0px;
+    }
+}
+
+section {
+    position: relative;
+    background-color: black;
+    height: 40vh;
+    min-height: 10rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+section img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+section .container {
+    position: relative;
+    z-index: 2;
+}
+
+section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.butt {
+    background-color: white;
+    border: 1px solid rgb(133, 130, 130);
+    cursor: pointer;
+}
+
+.gmap_canvas {
+    line-height: 0;
+}

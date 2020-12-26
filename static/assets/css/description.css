@@ -1,0 +1,196 @@
+/* Header */
+
+header .profile {
+    width: 45px;
+    height: 45px;
+}
+
+.nav-item:nth-child(1) {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.nav-item:nth-child(2) {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.social-description{
+    margin-left: 20px;
+}
+.nav-list {
+    margin-right: -52px;
+}
+
+.line {
+    margin-top: 2px;
+}
+
+@media (max-width: 800px) {
+    .line {
+        display: none;
+    }
+}
+
+.profile img {
+    border-radius: 50%;
+}
+
+.log-out {
+    background-color: white;
+    color: gray;
+    border: none;
+    z-index: 50;
+    position: absolute;
+    top: 100%;
+    right: 8%;
+}
+
+button.log-out {
+    display: none;
+}
+.event-des-img{
+    height: 500px;
+}
+@media only screen and (max-width: 600px) {
+    .description-main {
+        display: none;
+    }
+    .social-description{
+        margin-left: 0px !important;
+        margin-top: 10px;
+    }
+    .event-des-img, .main-pic-description{
+        height: 300px;
+    }
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.description-text {
+    font-size: 18px;
+    margin-left: 12px;
+}
+
+.join {
+    background: linear-gradient(to right, #3165b2, #90298d) !important;
+}
+
+@media only screen and (max-width: 1024px) {
+    .logo {
+        margin-left: 33px;
+    }
+    .nav-list {
+        margin-right: 18px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .logo {
+        margin-left: 20px;
+    }
+    .nav-list {
+        margin-right: 0px;
+    }
+}
+
+
+/* comment*/
+/*
+    Image credits:
+    uifaces.com (http://uifaces.com/authorized)
+*/
+
+#login {
+    display: none;
+}
+
+.page-header {
+    position: relative;
+}
+
+.reviews {
+    color: #555;
+    font-weight: bold;
+    margin: 10px auto 20px;
+}
+
+.notes {
+    color: #999;
+    font-size: 12px;
+}
+
+.media .media-object {
+    width: 85px;
+    height: 85px;
+    max-width: 120px;
+}
+
+.media-body {
+    margin-left: 10px;
+    margin-bottom: 8px;
+    border-radius: 15px;
+    border: 2px solid rgb(224, 224, 224);
+    padding: 10px;
+    position: relative;
+    background-color: rgb(247, 247, 247);
+}
+
+.media-date {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}
+
+.media-comment {
+    margin-bottom: 20px;
+}
+
+.media-replied {
+    margin: 0 0 20px 50px;
+}
+
+.media-replied .media-heading {
+    padding-left: 6px;
+}
+
+.btn-circle {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 15px;
+    border-radius: 20px;
+}
+
+.btn-circle span {
+    padding-right: 6px;
+}
+
+.embed-responsive {
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    padding: 50px 51px;
+    border: 1px solid #ddd;
+    border-top: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.new-comment{
+    margin: 0rem 8rem;
+}
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    margin-left: -50px;
+}
+
+@media only screen and (max-width: 800px) {
+    .media .media-object {
+        width: 70px;
+        height: 70px;
+    }
+}
