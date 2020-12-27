@@ -11,7 +11,7 @@ class CustomerSignUpForm(UserCreationForm):
     phone_number = forms.CharField(required=True)
     location = forms.CharField(required=True)
     email = forms.CharField(required=True)
-    cover_photo = forms.ImageField(required=False)
+    cover_photo = forms.ImageField(widget=forms.FileInput,required=False)
 
     class Meta(UserCreationForm.Meta):
         model = User

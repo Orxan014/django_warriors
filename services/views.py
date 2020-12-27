@@ -4,16 +4,32 @@ from .forms import GigsForm, CommentForm
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-from django.contrib.auth import login, logout,authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.views.generic import CreateView
 from .forms import CustomerSignUpForm, EmployeeSignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User
+import json
+import requests
+from django.contrib.auth import login, authenticate, logout
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, reverse, redirect
+from django.views.decorators.csrf import csrf_exempt
+from .models import *
+from django.contrib.auth.models import User
+from datetime import datetime
+from django.db import connection
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+
 
 def register(request):
     return render(request, 'register.html')
+
 
 class customer_register(CreateView):
     model = User
@@ -24,6 +40,7 @@ class customer_register(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('login')
+
 
 class employee_register(CreateView):
     model = User
@@ -37,21 +54,22 @@ class employee_register(CreateView):
 
 
 def login_request(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if user is not None :
-                login(request,user)
+            if user is not None:
+                login(request, user)
                 return redirect('/')
             else:
-                messages.error(request,"Invalid username or password")
+                messages.error(request, "Invalid username or password")
         else:
-                messages.error(request,"Invalid username or password")
+            messages.error(request, "Invalid username or password")
     return render(request, '../templates/login.html',
-    context={'form':AuthenticationForm()})
+                  context={'form': AuthenticationForm()})
+
 
 def logout_view(request):
     logout(request)
@@ -150,3 +168,70 @@ def gig_delete(request, id):
     gig = get_object_or_404(Gigs, id=id)
     gig.delete()
     return redirect("services:index")
+
+
+url = 'http://10.0.80.133:3000/oauth/getDetails'
+#url = 'https://serene-wildwood-35121.herokuapp.com/oauth/changeUr/'
+clientSecret = "445b354949599afbcc454441543297a9a827b477dd3eb78d1cdd478f1482b5da08f9b6c3496e650783927e03b20e716483d5b9085143467804a5c6d40933282f"
+
+
+def index(request):
+    if not request.user.is_authenticated:
+        return render(request, 'homepage.html')
+    else:
+        return HttpResponseRedirect(reverse('services:home'))
+
+
+@csrf_exempt
+def check_username(request):
+    data = json.loads(request.body.decode('utf-8'))
+    username = data['username']
+    try:
+        user = User.objects.get(username=username)
+        if user:
+            return HttpResponse('<b>Username must be unique.</b>')
+    except User.DoesNotExist:
+        return HttpResponse('')
+
+@csrf_exempt
+def check_email(request):
+    data = json.loads(request.body.decode('utf-8'))
+    email = data['email']
+    try:
+        if User.objects.get(email=email):
+            return HttpResponse('<b>Email must be unique.</b>')
+    except User.DoesNotExist:
+        return HttpResponse('')
+
+
+@csrf_exempt
+def open_close_task(request):
+    data = json.loads(request.body.decode('utf-8'))
+    wt_id = data["wanted_task_id"]
+    current_state = data["current"]
+    task = Wanted_Task.objects.get(id=wt_id)
+    task.isCompleted = not task.isCompleted
+    task.save()
+    return HttpResponse(str(task.isCompleted))
+
+
+def send_simple_message(reciever, subject, text):
+    print(">>", reciever)
+    print(">>", subject)
+    print(">>", text)
+    fromaddr = "zekiyev014@gmail.com"
+    toaddr = reciever
+    msg = MIMEMultipart()
+
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = subject
+    body = text
+    msg.attach(MIMEText(body, 'plain'))
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "freelancingportal")
+    text = msg.as_string()
+    x = server.sendmail(fromaddr, toaddr, text)
+    print(x, "sent mail")
+    server.quit()
