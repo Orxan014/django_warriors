@@ -12,26 +12,26 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     cover_photo = models.ImageField(blank=True)
-    phone_number = PhoneField(blank=True, help_text='Contact phone number')
     email = models.EmailField(null=True, blank=True, unique=True)
 
-
+#we have to maximize Customer model
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='custom', primary_key=True)
-    #phone_number = models.CharField(max_length=20)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='customer', primary_key=True)
+    phone_number = PhoneField(blank=True, help_text='Contact phone number')
     #adress = models.CharField(max_length=20)
     # location =
 
-
+#we have to maximize Employee model
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='worker', primary_key=True)
-    #phone_number = models.CharField(max_length=20)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='employee', primary_key=True)
     birthday = models.DateField( null=True, blank=True)
+    phone_number = PhoneField(blank=True, help_text='Contact phone number')
+
     #
 
-
+# employee can offer their services 
 class Gigs(models.Model):
-    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    connect_to = models.ForeignKey(Employee, on_delete=models.CASCADE)
     title = models.CharField(max_length=120, verbose_name="Title")
     content = RichTextField(verbose_name="Content")
     publishing_date = models.DateTimeField(auto_now_add=True)
@@ -43,7 +43,6 @@ class Gigs(models.Model):
 
     def get_absolute_url(self):
         return reverse('services:detail', kwargs={'id': self.id})
-        # return "/post/{}".format(self.id)
 
     def get_create_url(self):
         return reverse('services:create', kwargs={'id': self.id})
@@ -68,3 +67,25 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.name
+
+#class UserRating(models.Model):
+#    task = models.OneToOneField(Task, on_delete=models.CASCADE)
+#    emp = models.ForeignKey(
+#        CustomUser, related_name='rating_by', on_delete=models.CASCADE)
+#    fre = models.ForeignKey(
+#        CustomUser, related_name='rating_to', on_delete=models.CASCADE)
+#    f_rating = models.DecimalField(default=0, max_digits=2, decimal_places=1)
+#    e_rating = models.DecimalField(default=0, max_digits=2, decimal_places=1)
+
+#    def __str__(self):
+#        return str(self.task.id)+"--"+str(self.fre.user.username)+"--"+str(self.emp.user.username)
+#
+#class Notification(models.Model):
+#    _from = models.ForeignKey(
+#        CustomUser, related_name="msgfrom", on_delete=models.CASCADE)
+#    _to = models.ForeignKey(
+#        CustomUser, related_name='msgto', on_delete=models.CASCADE)
+#    message = models.CharField(default=None, max_length=300)
+#    has_read = models.BooleanField(default=False)
+#    sending_time = models.DateTimeField(auto_now_add=True, blank=True)
+#    recieving_time = models.DateTimeField(default=None, blank=True, null=True)

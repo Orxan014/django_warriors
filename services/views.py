@@ -13,7 +13,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 
 def register(request):
-    return render(request, '/templates/register.html')
+    return render(request, 'register.html')
 
 class customer_register(CreateView):
     model = User
@@ -23,7 +23,7 @@ class customer_register(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('/')
+        return redirect('login')
 
 class employee_register(CreateView):
     model = User
@@ -33,7 +33,7 @@ class employee_register(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('/')
+        return redirect('login')
 
 
 def login_request(request):
